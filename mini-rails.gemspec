@@ -1,11 +1,10 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "mini/rails/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "mini-rails"
-  spec.version       = Mini::Rails::VERSION
+  spec.version       = "0.0.1"
   spec.authors       = ["tsu-nera"]
   spec.email         = ["fox10225fox@gmail.com"]
 
