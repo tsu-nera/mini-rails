@@ -29,6 +29,16 @@ RSpec.describe 'ActiveRecord' do
     end
   end
 
+  describe "#all" do
+    let(:post) { Post.all.first }
+
+    it 'pass' do
+      expect(post).kind_of? Post
+      expect(post.id).to eq(1)
+      expect(post.title).to eq('Blueberry Muffins')
+    end
+  end
+
   describe "#execute_sql" do
     it 'pass' do
       rows = Post.connection.execute('SELECT * FROM posts')
@@ -38,5 +48,4 @@ RSpec.describe 'ActiveRecord' do
       expect(row.keys).to eq([:id, :title, :body, :created_at, :updated_at])
     end
   end
-
 end
