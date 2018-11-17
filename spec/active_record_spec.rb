@@ -48,4 +48,13 @@ RSpec.describe 'ActiveRecord' do
       expect(row.keys).to eq([:id, :title, :body, :created_at, :updated_at])
     end
   end
+
+  describe "#where" do
+    it "generate sql" do
+      relation = Post.where("id = 2").where("title IS NOT NULL")
+      expect(relation.to_sql).to eq("SELECT * FROM posts WHERE id = 2 AND title IS NOT NULL")
+      post = relation.first
+      expect(post.id).to eq(2)
+    end
+  end
 end

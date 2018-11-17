@@ -23,16 +23,19 @@ module ActiveRecord
     end
 
     def self.find(id)
-      find_by_sql("SELECT * FROM #{table_name} WHERE id = #{id.to_i}")
+      find_by_sql("SELECT * FROM #{table_name} WHERE id = #{id.to_i}").first
     end
 
     def self.all
-      connection.execute("SELECT * FROM #{table_name}").map { |attributes| new(attributes) }
+      Relation.new(self)
+    end
+
+    def self.where(*args)
+      all.where(*args)
     end
 
     def self.find_by_sql(sql)
-      attributes = connection.execute(sql).first
-      new(attributes)
+      connection.execute(sql).map { |attributes| new(attributes) }
     end
 
     def self.establish_connection(options)
